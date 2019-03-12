@@ -7,7 +7,32 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
+// Babel Polyfill for IE11 and below
+import 'babel-polyfill'
+
+
+//window.Vue = require('vue');
+import Vue from 'vue'
+
+// VUEX
+import store from './store/index.js'
+
+// ROUTER
+import router from './router/index.js'
+
+// Guards
+import './router/guards/auth.js'
+
+// Vuetify
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
+Vue.use(Vuetify);
+
+
+// Root View
+import App from './views/main.vue'
+
+
 
 /**
  * The following block of code may be used to automatically register your
@@ -28,6 +53,10 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+
 const app = new Vue({
-    el: '#app'
+    el: '#root',
+    router,
+    store,
+    render: h => h(App)
 });
